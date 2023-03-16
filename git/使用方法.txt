@@ -1,0 +1,158 @@
+git init创建master分支
+git add选择本地文件
+git commit - m "描述" 提交到本地仓库
+git remote add 名字 地址 绑定远程仓库
+	git remote add origin git@github.com:SRoStar/python_new.git
+		在origin下
+git remote显示远程可用分支
+git remote rm删除远程仓库
+git push -u 远程分支名(origin) 本地名(master) 传到远程仓库
+git fetch +远程(origin)  提取分支到本地(名字为origin其实是分支总集
+git merge + 名字 合并本地仓库到工作区 origin/master origin下的master分支，master在GitHub页面的左上角
+			--allow-unrelated-histories 进行允许合并
+分支：不同工作方式/快照
+git branch列出本地分支
+git branch 名字 创建新的分支
+git branch -m main master    # 将main改为master
+git branch -d (branchname) 删除分支
+git checkout (branch) 切换到我们要修改的分支。   ！！！这个很好，直接写上了
+git checkout -b (branchname) 命令来创建新分支并立即切换到该分支下，从而在该分支中操作。
+
+git pull下载远程代码并合并 git pull origin master
+
+git clone url 克隆远程仓库
+
+https://www.cnblogs.com/yszblog/p/15481697.html
+一、远程没有分支
+
+1.本地新建一个文件夹Testbranch，初始化本地仓库：git init ；
+
+2.与远程仓库建立连接：git remote add origin 仓库地址 ；
+
+3.建立本地分支Testbranch（分支名）：git branch Testbranch 。       或者 git checkout -b 分支名   （直接创建分支并切换到分支） ;
+
+4.切换到新建分支Testbranch（分支名）：git checkout Testbranch;
+
+5.将需要提交的代码复制到Testbranch文件夹中，
+
+6.git add ...；git commit -m "..."；
+
+7.提交到Testbranch 分支：git push origin Testbranch 。
+
+二、远程有分支
+
+1.新建文件夹，克隆分支代码到本地
+
+git clone git@github.com:raymarine/smarthub.raywebui.git -b mobileui（分支名 ）                                                                                                                                                                                                        
+2.直接在拉下来的文件夹mobileui下改代码；
+
+3.git add ...；git commit -m "..."；
+
+4.提交到mobileui分支：git push origin 分支名。
+
+ 
+
+日常修改代码提交：
+
+1.git pull origin 主/分支名 （pull拉取最新代码并且自动融合本地代码，最好先看看本地有没有没提交的）或者 git fetch 主/分支名(fetch拉取最新代码并且不会自动融合本地代码)；
+
+2.修改代码，git status 查看修改哪些代码；
+
+3.git add ...；git commit -m "..."；
+
+4.提交到主/分支：git push origin 分支名。
+
+ 
+
+ 
+
+三、远程没有仓库
+
+1.在github创建仓库，然后就会有主分支；
+
+2.本地新建一个文件夹，初始化本地仓库：git init ；
+
+3.与远程仓库建立连接：git remote add origin 仓库地址 ；
+
+4.如果要将代码直接提交到主分支，则直接执行git add ...；git commit -m "..."；git push origin master;
+
+5.如果要新建分支，将代码提交到分支，则走一中的3，然后再往下走。
+
+ 
+
+四、两个仓库之间进行切换
+
+1.git remote -v show            （查看当前所在的远程仓库；）
+
+2.git remote remove origin                   （ 移除当前远程仓库连接；）
+
+3.git remote add origin 远程仓库地址                  （和另一个远程仓库建立连接）
+
+4.git add ...；git commit -m "..."；
+
+5.git push origin 分支名
+
+ 
+
+ 
+
+五、
+
+先保证当前的已经同步了，如果没有同步请使用git add 同步一下，否则使用git rm -r --cached指令会无法通过。
+
+1.git rm --cached 要忽略的文件 (如: git rm --cahced build/*, 如当前目录的内容全部是不需要的, 那么你可以使用最最简单的命令搞定git rm -r --cached .)
+
+2.然后在 .gitignore 文件中加入该忽略的文件(如：*.o*.info)
+
+3.git add .
+
+4.git commit -m " commet for commit ....."
+
+5.git push
+
+ 
+
+ 
+
+六、1、项目有一个问题#66需要修改，创建一个处理#66问题的分支A，在#66修改代码并且有提交，现在还有修改没有提交。
+
+突然来了一个紧急bug需要处理，于是需要创建一个#88的分支B，但分支A的代码还没测试不能提交，则可以通过git stash/git stash push贮藏修改分支,
+
+等分支B紧急bug修改完毕后，回到分支A，git stash list 可以查看所有贮藏，git stash apply/git stash apply 贮藏名  进行恢复。
+
+参考 https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6
+
+ 如果在修改分支B紧急bug期间，别人有提交代码，提交的时候有冲突，如果出现“Merge branch ‘master’ of …”这条信息，使用git pull --rebase命令，如果没有冲突,则会直接合并，如果存在冲突，手动解决冲突即可，不会再产生那条多余的信息。
+
+ 2、提交指定文件
+
+1 git status 查看仓库状态
+
+2 git add src/components/文件名 添加需要提交的文件名（加路径--参考git status 打印出来的文件路径）
+
+3 git stash -u -k 忽略其他文件，把现修改的隐藏起来，这样提交的时候就不会提交未被add的文件
+
+4 git commit -m "哪里做了修改可写入..."
+
+5 git pull 拉取合并（提交的时候有冲突，如果出现“Merge branch ‘master’ of …”这条信息，则先使用git pull --rebase origin master命令，如果没有冲突,则会直接合并，如果存在冲突，手动解决冲突即可，不会再产生那条多余的信息，再执行git pull ）
+
+6 git push 推送到远程仓库
+
+7 git stash pop 恢复之前忽略的文件
+
+
+ 七、回退到指定版本
+
+git diff 什么参数都不加，默认比较工作区暂存区的差异
+git diff 文件路径
+git diff --cached [<path>...]比较暂存区与最新本地版本库（本地库中最近一次commit的内容）
+git diff HEAD [<path>...]比较工作区与最新本地版本库。如果HEAD指向的是master分支，那么HEAD还可以换成master
+git reset ** fileName
+
+ 
+1.git reset --mixed：此为默认方式，不带任何参数的git reset，这种方式，它回退到某个版本，只保留源码，回退commit和index信息
+ 
+2.git reset --soft:回退到某个版本，只回退了commit的信息，不会恢复到index file一级。如果还要提交，直接commit即可
+ 
+3.git reset --hard 版本号   彻底回退到某个版本，本地的源码也会变成为上一个版本的内容
+        4.使用git add 错误增加了文件，可以使用git restore --staged 文件路径    撤回刚add的文件
