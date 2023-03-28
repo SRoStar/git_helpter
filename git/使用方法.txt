@@ -23,6 +23,11 @@ git pull下载远程代码并合并 git pull origin master
 
 git clone url 克隆远程仓库
 
+查看文件git ls-files
+	git ls-files --with-tree=HEAD  (本地版本库)？
+删除文件git rm --cached +文件名 删除缓存区中的文件
+	git rm filename 完全删除
+
 https://www.cnblogs.com/yszblog/p/15481697.html
 一、远程没有分支
 
