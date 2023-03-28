@@ -1,3 +1,4 @@
+ssh -T git@github.com 测试是否能连到github
 git init创建master分支
 git add选择本地文件
 git add.添加所有文件
