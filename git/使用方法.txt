@@ -1,5 +1,6 @@
 git init创建master分支
 git add选择本地文件
+git add.添加所有文件
 git commit - m "描述" 提交到本地仓库
 git remote add 名字 地址 绑定远程仓库
 	git remote add origin git@github.com:SRoStar/python_new.git
